@@ -1,6 +1,6 @@
 :root {
 
-  --gallery-item-gap: 425px;
+  --gallery-item-gap: 480px;
 }
 * {
 margin: 0;
@@ -65,8 +65,8 @@ overflow-x: hidden;
 
 .container .icon .imgBx {
   position: absolute;
-  width: 90px;
-  height: 90px;
+  width: 110px;
+  height: 110px;
   border-radius: 16px;
   transform: rotate(calc(360deg / 22 * (var(--i) - 1))) translateX(var(--gallery-item-gap));
   transform-origin: center;
@@ -84,7 +84,7 @@ overflow-x: hidden;
 /* Information display area */
 .info-display {
 position: absolute;
-top: 70%;
+top: 65%;
 left: 50%;
 transform: translate(-50%, -50%);
 color: white;
