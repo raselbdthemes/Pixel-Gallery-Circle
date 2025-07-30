@@ -1,124 +1,153 @@
+:root {
 
-   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'poppins', sans-serif;
-    }
-    
-    body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #222;
-    
-    }
+  --gallery-item-gap: 425px;
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'poppins', sans-serif;
+}
 
-    
-    .container {
-    position: relative;
-    width: 1200px;
-    height: 700px;
-    overflow: hidden;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
-    }
+body {
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background: #222;
 
-    .container .bottom-dark-shadow {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100px;
-        background: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%);
-        z-index: 1;
-    }
-    
-    .container .icon {
-    
-    position: relative;
-    width: fit-content;    
-    height: 100%;
-    display: flex; 
-    justify-content: start;   
-    cursor: pointer; 
-    align-items: end;
-    transform: translateX(85px);
-    }
-    
-    .container .icon .imgBx {
-      position: absolute;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      transition: 0.5s;
-      transform: rotate(calc(360deg / 22 * var(--i)));
-      transform-origin: 514px;
-    }
-    
-    .container .icon .imgBx img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-      object-fit: cover;
-    }
+}
+
+
+.container {
+  position: relative;
+  width: 1200px;
+  height: 600px;
+  overflow: hidden;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+  margin: 0 auto;
+}
+
+.center-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .icon {
+
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  animation: rotateWheel 180s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotateWheel {
+  from {
+      transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+      transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.container .icon .imgBx {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
+  transform: rotate(calc(360deg / 22 * (var(--i) - 1))) translateX(var(--gallery-item-gap));
+  transform-origin: center;
+  transition: 0.3s;
+  z-index: 2;
+}
+
+.container .icon .imgBx img {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+}
 
 /* Information display area */
 .info-display {
-  position: absolute;
-  top: 68%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: center;
-  max-width: 400px;
-  z-index: 1000;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
+position: absolute;
+top: 70%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: white;
+text-align: center;
+max-width: 400px;
+z-index: 1000;
+opacity: 1;
+visibility: visible;
+transition: all 0.3s ease;
+padding: 30px;
+pointer-events: auto;
 }
 
-.info-display.show {
-  opacity: 1;
-  visibility: visible;
-}
+/* .show class removed - info-display always visible */
 
 .info-display h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #fff;
+font-size: 24px;
+margin-bottom: 15px;
+color: #fff;
 }
 
 .info-display p {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  color: #ccc;
+font-size: 14px;
+line-height: 1.6;
+margin-bottom: 20px;
+color: #ccc;
 }
 
 .info-display button {
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 10px 25px;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+background: #fff;
+color: #000;
+border: none;
+padding: 10px 25px;
+border-radius: 25px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
 }
 
 .info-display button:hover {
-  background: #f0f0f0;
-  transform: scale(1.05);
+background: #f0f0f0;
+transform: scale(1.05);
 }
 
-/* Image hover effect */
-.container .icon .imgBx:hover {
-  transform: rotate(calc(360deg / 22 * var(--i))) scale(1.01);
-  z-index: 10;
+/* Active state styles */
+.container .icon .imgBx.active {
+transform: rotate(calc(360deg / 22 * (var(--i) - 1))) translateX(var(--gallery-item-gap)) scale(1.02);
+z-index: 100;
+border:1px solid white;
+box-shadow: 0 0 20px rgb(255 255 255 / 17%);
+}
+
+/* Image hover effect - only apply to non-active items */
+.container .icon .imgBx:not(.active):hover {
+transform: rotate(calc(360deg / 22 * (var(--i) - 1))) translateX(var(--gallery-item-gap)) scale(1.05);
+z-index: 10;
+}
+
+
+.bottom-dark-effect {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 140px;
+background: linear-gradient(to top, rgb(0 0 0 / 92%) 0%, rgb(0 0 0 / 0%) 100%);
 }

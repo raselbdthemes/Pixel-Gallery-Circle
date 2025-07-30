@@ -6,8 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const infoDescription = document.getElementById('info-description');
     const infoButton = document.getElementById('info-button');
 
-    // Function to set info
+    // Function to set info and handle active state
     function setInfoFromBox(imgBox) {
+        // Remove active class from all boxes
+        imgBoxes.forEach(box => box.classList.remove('active'));
+        
+        // Add active class to clicked box
+        imgBox.classList.add('active');
+        
         const title = imgBox.getAttribute('data-title');
         const description = imgBox.getAttribute('data-description');
         const buttonText = imgBox.getAttribute('data-button');
@@ -16,21 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
         infoButton.textContent = buttonText;
     }
 
-    // প্রথম .imgBx (যার --i:1) এর তথ্য ডিফল্ট হিসেবে দেখাও
+    // Set first image as active by default
     const firstImgBox = document.querySelector('.imgBx[style*="--i:1"]');
     if (firstImgBox) {
         setInfoFromBox(firstImgBox);
-        infoDisplay.classList.add('show');
     }
 
     // Add click event to each image box
     imgBoxes.forEach(imgBox => {
         imgBox.addEventListener('click', function(e) {
             setInfoFromBox(this);
-            infoDisplay.classList.add('show');
-            e.stopPropagation(); // Prevent document click from firing
+            e.stopPropagation();
         });
     });
-
-    // info-display সবসময় visible থাকবে, তাই hide করার কোনো event নেই
 });
