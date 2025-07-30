@@ -13,6 +13,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track current active index
     let currentIndex = 0;
 
+    // Function to truncate text to 10 words on mobile
+    function truncateDescription(text) {
+        if (window.innerWidth <= 768) {
+            const words = text.split(' ');
+            if (words.length > 10) {
+                return words.slice(0, 10).join(' ') + '...';
+            }
+        }
+        return text;
+    }
+
     // Function to set info and handle active state
     function setInfoFromBox(imgBox) {
         // Remove active class from all boxes
@@ -24,8 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = imgBox.getAttribute('data-title');
         const description = imgBox.getAttribute('data-description');
         const buttonText = imgBox.getAttribute('data-button');
+        
         infoTitle.textContent = title;
-        infoDescription.textContent = description;
+        infoDescription.textContent = truncateDescription(description);
         infoButton.textContent = buttonText;
         
         // Update current index based on the imgBox
@@ -87,6 +99,16 @@ document.addEventListener('DOMContentLoaded', function() {
             goToNext();
         } else if (e.key === 'ArrowLeft') {
             goToPrevious();
+        }
+    });
+
+    // Handle window resize to update descriptions
+    window.addEventListener('resize', function() {
+        // Update current description when screen size changes
+        if (imgBoxes[currentIndex]) {
+            const currentImgBox = imgBoxes[currentIndex];
+            const description = currentImgBox.getAttribute('data-description');
+            infoDescription.textContent = truncateDescription(description);
         }
     });
 });
