@@ -65,8 +65,8 @@ overflow-x: hidden;
 
 .container .icon .imgBx {
   position: absolute;
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   border-radius: 16px;
   transform: rotate(calc(360deg / 22 * (var(--i) - 1))) translateX(var(--gallery-item-gap));
   transform-origin: center;
@@ -79,6 +79,7 @@ overflow-x: hidden;
   height: 100%;
   border-radius: 16px;
   object-fit: cover;
+  transform: rotate(90deg);
 }
 
 /* Information display area */
@@ -275,7 +276,11 @@ background: linear-gradient(to top, rgb(0 0 0 / 92%) 0%, rgb(0 0 0 / 0%) 100%);
 
   /* Active state - mobile */
   .container .icon .imgBx.active {
-    transform: rotate(calc(360deg / 22 * (var(--i) - 1))) translateX(var(--gallery-item-gap)) scale(1.05);
+    transform: rotate(0deg) translateX(var(--gallery-item-gap)) scale(1.2);
+    width: 54px;
+    height: 54px;
+    border: 2px solid white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
   }
 
   /* Hover effect - mobile */
@@ -303,6 +308,14 @@ background: linear-gradient(to top, rgb(0 0 0 / 92%) 0%, rgb(0 0 0 / 0%) 100%);
     width: 40px;
     height: 40px;
     border-radius: 10px;
+  }
+
+  .container .icon .imgBx.active {
+    width: 48px;
+    height: 48px;
+    transform: rotate(0deg) translateX(var(--gallery-item-gap)) scale(1.2);
+    border: 2px solid white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
   }
 
   .container .icon .imgBx img {
@@ -368,5 +381,13 @@ background: linear-gradient(to top, rgb(0 0 0 / 92%) 0%, rgb(0 0 0 / 0%) 100%);
   .container .icon .imgBx {
     width: 50px;
     height: 50px;
+  }
+
+  .container .icon .imgBx.active {
+    width: 60px;
+    height: 60px;
+    transform: rotate(0deg) translateX(var(--gallery-item-gap)) scale(1.2);
+    border: 2px solid white;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
   }
 }
